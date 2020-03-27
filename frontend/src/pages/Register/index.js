@@ -29,9 +29,18 @@ export default function Logon() {
         try {
             const response = await api.post('ongs', data)
 
-            alert(`Seu ID de acesso: ${response.data.id}`)
+            alert(`Seu ID de acesso é: ${response.data.id} ao fechar essa mensagem ele será copiado automaticamente e você será redirecionado para o logon.`)
 
-            history.push('/');
+            // navigator.clipboard.writeText(response.data.id);
+
+            var dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.setAttribute('value', response.data.id);
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            history.push('/')
         } catch (error) {
             alert('Erro no cadastro, tente novamente.')
             console.log(error)
