@@ -16,7 +16,6 @@ export default function Profile() {
 
     const history = useHistory();
 
-    const ongName = localStorage.getItem('ongName')
     const ongId = localStorage.getItem('ongId')
 
     async function handleNewIncident(e) {
