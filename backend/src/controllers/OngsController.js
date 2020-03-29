@@ -4,11 +4,9 @@ const crypto = require('crypto')
 module.exports = {
     async index (req, res) {
         const ongs = await connection('ongs').select('*')
-        //await connection('ongs').select('*').delete()
+        // await connection('ongs').select('*').delete()
     
         return res.json(ongs)
-
-        // return res.json({})
     },
 
     async create (req, res) {
