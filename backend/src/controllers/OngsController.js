@@ -14,6 +14,7 @@ module.exports = {
 
         try {
             data.id = crypto.randomBytes(4).toString('HEX')
+            data.whatsapp = Number("" + 55 + data.whatsapp)
     
             await connection('ongs').insert(data)
         
