@@ -35,7 +35,9 @@ export default function Incidents() {
         const response = await api.get('incidents', {
             params: { page }
         });
-
+        if (response.data.length === 0) {
+            return
+        }
         setIncidents([...incidents, ...response.data]);
         setTotal(response.headers['x-total-count']);
         setPage(page + 1);
@@ -44,6 +46,13 @@ export default function Incidents() {
 
     useEffect(() => {
         loadIncidents();
+
+        return function cleanup() {
+            setIncidents([]);
+            setPage(1);
+            setTotal(0);
+            setLoading(false);
+        };
     }, []); 
 
     return (
@@ -59,6 +68,7 @@ export default function Incidents() {
             <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia.</Text>
 
             <FlatList 
+                extraData={incidents}
                 data={incidents}
                 style={styles.incidentList}
                 keyExtractor={incident => String(incident.id)}
